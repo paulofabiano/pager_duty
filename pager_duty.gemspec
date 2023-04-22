@@ -20,7 +20,7 @@ Gem::Specification.new do |spec|
   spec.metadata["changelog_uri"] = "https://www.github.com/paulofabiano/pd-ruby-client/readme.md"
 
   spec.files = Dir['lib/**/*.rb']
-  # spec.executables = ["pager_duty"]
+  spec.executables = ["pager_duty"]
   spec.test_files = spec.files.grep(%r{^(test|spec|features)/})
   spec.require_paths = ["lib"]
 
