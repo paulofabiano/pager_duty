@@ -9,7 +9,7 @@ module PagerDuty
     attr_reader :users
 
     def initialize(auth_token)
-      @users = User.new(auth_token)
+      @users = PagerDuty::Resources::User.new(auth_token)
     end
   end
 end
