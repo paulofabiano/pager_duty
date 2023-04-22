@@ -1,8 +1,9 @@
 # frozen_string_literal: true
+require './lib/pager_duty/version'
 
 Gem::Specification.new do |spec|
   spec.name = "pager_duty"
-  spec.version = "0.1.0"
+  spec.version = PagerDuty::VERSION
   spec.authors = ["Paulo Langer"]
   spec.email = ["paulofabiano@gmail.com"]
 
