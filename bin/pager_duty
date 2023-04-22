@@ -1,0 +1,5 @@
+#!/usr/bin/env ruby
+
+require "pager_duty/cli"
+
+PagerDuty::CLI.start
