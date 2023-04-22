@@ -1,6 +1,6 @@
 module PagerDuty
   module Resources
-    class User < BaseResource
+    class User < Base
       def list_users
         self.class.get('/users')
       end
