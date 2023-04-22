@@ -2,7 +2,7 @@ require "httparty"
 
 class BaseResource
   include HTTParty
-  
+
   def initialize(auth_token)
     self.class.base_uri 'https://api.pagerduty.com'
     self.class.default_options.merge!(
@@ -21,6 +21,14 @@ class User < BaseResource
   end
 end
 
-users = User.new('y_NbAkKc66ryYTWUXYEu')
+class Client
+  attr_reader :users
 
-puts users.list_users
+  def initialize(auth_token)
+    @users = User.new(auth_token)
+  end
+end
+
+client = Client.new('y_NbAkKc66ryYTWUXYEu')
+
+puts client.users.list_users
