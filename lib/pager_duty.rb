@@ -1,5 +1,9 @@
 require "httparty"
 
+Dir[File.join("./lib", "**/*.rb")].each do |file|
+  require file
+end
+
 module PagerDuty
   class Client
     attr_reader :users
