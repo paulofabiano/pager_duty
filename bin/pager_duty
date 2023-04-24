@@ -1,5 +1,6 @@
 #!/usr/bin/env ruby
+# frozen_string_literal: true
 
-require "pager_duty/cli"
+require 'pager_duty/cli'
 
 PagerDuty::CLI.start

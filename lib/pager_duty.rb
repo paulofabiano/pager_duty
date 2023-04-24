@@ -1,6 +1,8 @@
-require "httparty"
+# frozen_string_literal: true
 
-Dir[File.join("./lib", "**/*.rb")].each do |file|
+require 'httparty'
+
+Dir[File.join('./lib', '**/*.rb')].each do |file|
   require file
 end
 
@@ -32,14 +34,14 @@ module PagerDuty
     private
 
     def handle_api_error(response)
-      case response.code
-      when 400..499
-        message = parser_error_message(response) || "Client error  (#{response.code})"
-      when 500..599
-        message = "Server error (#{response.code})"
-      else
-        message = "An unkown error ocurred (#{response.code})"
-      end
+      message = case response.code
+                when 400..499
+                  parser_error_message(response) || "Client error  (#{response.code})"
+                when 500..599
+                  "Server error (#{response.code})"
+                else
+                  "An unkown error ocurred (#{response.code})"
+                end
 
       raise ApiError.new(message, response.code)
     end

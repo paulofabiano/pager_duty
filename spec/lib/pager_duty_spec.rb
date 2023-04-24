@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 require_relative '../../lib/pager_duty'
@@ -26,23 +28,23 @@ RSpec.describe PagerDuty::Client do
       let(:response) { client.list_users }
 
       it 'returns limit' do
-        expect(response["limit"]).to eq(1)
+        expect(response['limit']).to eq(1)
       end
 
       it 'returns offset' do
-        expect(response["offset"]).to eq(0)
+        expect(response['offset']).to eq(0)
       end
 
       it 'returns total' do
-        expect(response["total"]).to be_nil
+        expect(response['total']).to be_nil
       end
 
       it 'returns users as array' do
-        expect(response["users"]).to be_a(Array)
+        expect(response['users']).to be_a(Array)
       end
 
       it 'returns 3 users' do
-        expect(response["users"].count).to eq(3)
+        expect(response['users'].count).to eq(3)
       end
     end
 
@@ -55,15 +57,15 @@ RSpec.describe PagerDuty::Client do
               body: {
                 error: {
                   code: 401,
-                  message: "Authentication token is invalid",
-                  errors: ["invalid token"]
+                  message: 'Authentication token is invalid',
+                  errors: ['invalid token']
                 }
               }.to_json,
               headers: { 'Content-Type' => 'application/json' }
             )
         end
 
-        it "raises an ApiError" do
+        it 'raises an ApiError' do
           expect { client.list_users }.to raise_error(
             PagerDuty::ApiError, 'Authentication token is invalid'
           )

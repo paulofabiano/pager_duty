@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module PagerDuty
   module UserResource
     def list_users(limit: nil, offset: nil)
