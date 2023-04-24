@@ -12,9 +12,13 @@ module PagerDuty
 
     desc 'list_users', 'Fetch all users'
     def list_users
-      response = @client.list_users
-      
-      puts response
+      begin
+        response = @client.list_users
+        
+        puts response
+      rescue PagerDuty::ApiError => e
+        say "Error: #{e.message}, Code: #{e.status_code}", :red
+      end
     end
 
     no_commands {
