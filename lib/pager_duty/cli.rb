@@ -4,6 +4,7 @@ require 'pager_duty'
 module PagerDuty
   class CLI < Thor
     class_option :auth_token, required: true, aliases: '-t', desc: 'API authentication token'
+    class_option :pretify, required: false, aliases: '-p', desc: 'Pretify JSON responses'
 
     def initialize(*args)
       super
@@ -20,7 +21,7 @@ module PagerDuty
           offset: options[:offset]
         )
         
-        puts response
+        puts output(response)
       rescue PagerDuty::ApiError => e
         say "Error: #{e.message}, Code: #{e.status_code}", :red
       end
@@ -29,6 +30,15 @@ module PagerDuty
     no_commands {
       def self.exit_on_failure?
         true
+      end
+
+      def output(response)
+        case options[:pretify]
+        when "true"
+          JSON.pretty_generate(response)
+        else
+          response
+        end
       end
     }
   end

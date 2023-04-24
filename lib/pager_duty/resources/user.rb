@@ -4,7 +4,13 @@ module PagerDuty
       options =  { query: { limit:, offset: }.compact }
 
       response = self.class.get('/users', options)
-      response.success? ? response : handle_api_error(response)
+      response.success? ? parse_users(response) : handle_api_error(response)
+    end
+
+    private
+
+    def parse_users(response)
+      JSON.parse(response.body)
     end
   end
 end
