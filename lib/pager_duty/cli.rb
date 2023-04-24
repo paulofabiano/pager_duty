@@ -11,9 +11,14 @@ module PagerDuty
     end
 
     desc 'list_users', 'Fetch all users'
+    method_option :limit, default: "25", aliases: '-l', desc: "Number of results per page"
+    method_option :offset, default: "0", aliases: '-o', desc: "Offset to start pagination search"
     def list_users
       begin
-        response = @client.list_users
+        response = @client.list_users(
+          limit: options[:limit],
+          offset: options[:offset]
+        )
         
         puts response
       rescue PagerDuty::ApiError => e
